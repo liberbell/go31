@@ -8,7 +8,7 @@ import (
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte{"Running API v1...\n"})
+	w.Write([]byte("Running API v1...\n"))
 }
 
 func main() {
