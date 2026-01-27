@@ -12,7 +12,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc(":", rootHandler)
+	http.HandleFunc("/", rootHandler)
 	err := http.ListenAndServe("localhost:11111", nil)
 	if err != nil {
 		fmt.Println("Error:", err)
