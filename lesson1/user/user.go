@@ -1,5 +1,7 @@
 package user
 
 type User struct {
-	ID bson.objectId
+	ID   bson.ObjectId `json: "id"`
+	Nmae string        `json: "name"`
+	Role string        `json: "role"`
 }
