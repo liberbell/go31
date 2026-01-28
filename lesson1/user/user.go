@@ -7,3 +7,7 @@ type User struct {
 	Nmae string        `json: "name"`
 	Role string        `json: "role"`
 }
+
+const {
+	dbPath = "users.db"
+}
