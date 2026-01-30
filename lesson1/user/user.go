@@ -56,3 +56,10 @@ func Delete(id bson.ObjectId) error {
 	}
 	return db.DeleteStruct(u)
 }
+
+func (u *User) Save() error {
+	db, err := storm.Open(dbPath)
+	if err != nil {
+		return err
+	}
+}
