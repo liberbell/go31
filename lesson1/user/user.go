@@ -17,4 +17,7 @@ func All() ([]User, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer db.Close()
+	users := []User{}
+	err = db.All()
 }
