@@ -28,4 +28,8 @@ func All() ([]User, error) {
 
 func One(id bson.ObjectId) (*User, error) {
 	db, err := storm.Open(dbPath)
+	if err != nil {
+		return nil, err
+	}
+	defer db.Close()
 }
