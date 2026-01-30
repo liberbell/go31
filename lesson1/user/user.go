@@ -19,5 +19,9 @@ func All() ([]User, error) {
 	}
 	defer db.Close()
 	users := []User{}
-	err = db.All()
+	err = db.All(&users)
+	if err != nil {
+		return nil, err
+	}
+	return users, nil
 }
