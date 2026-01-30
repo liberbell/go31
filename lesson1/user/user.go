@@ -54,5 +54,5 @@ func Delete(id bson.ObjectId) error {
 	if err != nil {
 		return err
 	}
-	return nil
+	return db.DeleteStruct(u)
 }
