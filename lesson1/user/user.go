@@ -11,3 +11,10 @@ type User struct {
 const {
 	dbPath = "users.db"
 }
+
+func All() ([]User, error) {
+	db, err := storm.Open(dbPath)
+	if err != nil {
+		return nil, err
+	}
+}
