@@ -25,3 +25,7 @@ func All() ([]User, error) {
 	}
 	return users, nil
 }
+
+func One(id bson.ObjectId) (*User, error) {
+	db, err := storm.Open(dbPath)
+}
