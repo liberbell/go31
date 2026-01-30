@@ -19,6 +19,7 @@ func All() ([]User, error) {
 	}
 	defer db.Close()
 	users := []User{}
+
 	err = db.All(&users)
 	if err != nil {
 		return nil, err
@@ -35,4 +36,23 @@ func One(id bson.ObjectId) (*User, error) {
 	u := new(User)
 
 	err = db.One("ID", "id", u)
+	if err != nil {
+		return nil, err
+	}
+	return u, nil
+}
+
+func Delete(id bson.ObjectId) error {
+	db, err := storm.Open(dbPath)
+	if err != nil {
+		return err
+	}
+	defer db.Close()
+	u := new(User)
+
+	err = db.One("ID", "id", u)
+	if err != nil {
+		return err
+	}
+	return nil
 }
