@@ -32,4 +32,5 @@ func One(id bson.ObjectId) (*User, error) {
 		return nil, err
 	}
 	defer db.Close()
+	u := new(User)
 }
