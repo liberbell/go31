@@ -65,3 +65,10 @@ func (u *User) Save() error {
 	defer db.Close()
 	return db.Save(u)
 }
+
+func (u *User) Validate() error {
+	if u.Name == "" {
+		return ErrRecordInvalid
+	}
+	return
+}
