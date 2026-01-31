@@ -67,6 +67,9 @@ func Delete(id bson.ObjectId) error {
 }
 
 func (u *User) Save() error {
+	if err := u.Validate(); err != nil {
+		return err
+	}
 	db, err := storm.Open(dbPath)
 	if err != nil {
 		return err
