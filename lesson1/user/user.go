@@ -1,6 +1,10 @@
 package user
 
-import "gopkg.in/mgo.v2/bson"
+import (
+	"errors"
+
+	"gopkg.in/mgo.v2/bson"
+)
 
 type User struct {
 	ID   bson.ObjectId `json: "id" storm: "id"`
@@ -8,9 +12,13 @@ type User struct {
 	Role string        `json: "role"`
 }
 
-const {
+const (
 	dbPath = "users.db"
-}
+)
+
+var (
+	ErrRecordInvalid = errors.New("record is invalid")
+)
 
 func All() ([]User, error) {
 	db, err := storm.Open(dbPath)
