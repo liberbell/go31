@@ -2,7 +2,7 @@ package handlers
 
 import "net/http"
 
-func rootHandler(w http.ResponseWriter, r *http.Request) {
+func RootHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		w.WriteHeader(http.StatusNotFound)
 		w.Write([]byte("Asset not found\n"))
