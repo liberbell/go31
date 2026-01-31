@@ -3,6 +3,7 @@ package user
 import (
 	"errors"
 
+	"github.com/asdine/storm"
 	"gopkg.in/mgo.v2/bson"
 )
 
