@@ -4,10 +4,19 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"strings"
 )
 
 func usersRouter(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.URL.Path)
+	path := strings.TrimSuffix(r.URL.Path, "/")
+
+	if path == "/users" {
+		switch r.Method {
+
+		case http.MethodGet:
+			return
+		}
+	}
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
