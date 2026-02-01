@@ -1,10 +1,10 @@
 package main
 
 import (
-	"Lesson1/rest_handlers"
 	"fmt"
 	"net/http"
 	"os"
+	"rest_handlers"
 )
 
 func main() {
