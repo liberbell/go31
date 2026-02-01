@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
-	"lesson1/handlers"
 	"net/http"
 	"os"
 )
 
 func main() {
-	http.HandleFunc("/", handlers.RootHandler)
-	http.HandleFunc("/users", handlers.UserHandler)
+	http.HandleFunc("/", rest_handlers.RootHandler)
+	http.HandleFunc("/users", rest_handlers.UserHandler)
 	err := http.ListenAndServe("localhost:11111", nil)
 	if err != nil {
 		fmt.Println("Error:", err)
