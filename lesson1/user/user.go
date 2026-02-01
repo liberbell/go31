@@ -82,5 +82,5 @@ func (u *User) Validate() error {
 	if u.Name == "" {
 		return ErrRecordInvalid
 	}
-	return
+	return nil
 }
