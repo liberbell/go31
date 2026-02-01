@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"rest_handlers/responses"
 	"strings"
 )
 
@@ -17,7 +18,7 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 		case http.MethodPost:
 			return
 		default:
-			PostError(w, http.StatusMethodNotAllowed)
+			responses.PostError(w, http.StatusMethodNotAllowed)
 		}
 	}
 }
