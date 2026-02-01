@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"handlers"
+	"lesson1/handlers"
 	"net/http"
 	"os"
 )
