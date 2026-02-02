@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"os"
 	"strings"
+
+	"gopkg.in/mgo.v2/bson"
 )
 
 func postError(w http.ResponseWriter, code int) {
@@ -24,6 +26,11 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 			postError(w, http.StatusMethodNotAllowed)
 			return
 		}
+	}
+	path = strings.TrimPrefix(path, "/users/")
+
+	if !bson.IsObjectIdHex(path) {
+		postError(w, http.StatusNotFound)
 	}
 }
 
