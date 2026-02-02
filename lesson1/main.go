@@ -40,6 +40,10 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 		return
 	case http.MethodPost:
 		return
+	case http.MethodPatch:
+		return
+	case http.MethodDelete:
+		return
 
 	}
 }
