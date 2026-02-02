@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"os"
@@ -8,6 +9,8 @@ import (
 
 	"gopkg.in/mgo.v2/bson"
 )
+
+type jsonResponse map[string]interface{}
 
 func postError(w http.ResponseWriter, code int) {
 	http.Error(w, http.StatusText(code), code)
@@ -51,7 +54,14 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
-
+	if content != nil {
+		js, err := json.Marshal(content)
+		if err != nil {
+			postError(w, http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+	}
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
