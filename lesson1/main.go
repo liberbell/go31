@@ -61,6 +61,9 @@ func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(code)
+		w.Write(js)
+		return
 	}
 }
 
