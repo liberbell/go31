@@ -34,7 +34,7 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	id := bson.ObjectIdHex(path)
+	// id := bson.ObjectIdHex(path)
 	switch r.Method {
 	case http.MethodGet:
 		return
@@ -48,6 +48,10 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 		postError(w, http.StatusMethodNotAllowed)
 		return
 	}
+}
+
+func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
+
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
