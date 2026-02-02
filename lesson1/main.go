@@ -44,7 +44,9 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 		return
 	case http.MethodDelete:
 		return
-
+	default:
+		postError(w, http.StatusMethodNotAllowed)
+		return
 	}
 }
 
