@@ -31,6 +31,16 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 
 	if !bson.IsObjectIdHex(path) {
 		postError(w, http.StatusNotFound)
+		return
+	}
+
+	id := bson.ObjectIdHex(path)
+	switch r.Method {
+	case http.MethodGet:
+		return
+	case http.MethodPost:
+		return
+
 	}
 }
 
