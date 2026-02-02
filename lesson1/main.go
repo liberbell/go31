@@ -65,6 +65,8 @@ func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
 		w.Write(js)
 		return
 	}
+	w.WriteHeader(code)
+	w.Write([]byte(http.StatusText(code)))
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
