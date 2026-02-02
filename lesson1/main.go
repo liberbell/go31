@@ -4,9 +4,12 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"rest_handlers/responses"
 	"strings"
 )
+
+func postError(w http.ResponseWriter, code int) {
+	http.Error(w, http.StatusText(code), code)
+}
 
 func usersRouter(w http.ResponseWriter, r *http.Request) {
 	path := strings.TrimSuffix(r.URL.Path, "/")
@@ -18,7 +21,8 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 		case http.MethodPost:
 			return
 		default:
-			responses.PostError(w, http.StatusMethodNotAllowed)
+			postError(w, http.StatusMethodNotAllowed)
+			return
 		}
 	}
 }
