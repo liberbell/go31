@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"restapi/user"
 	"strings"
 
 	"gopkg.in/mgo.v2/bson"
@@ -50,6 +51,13 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 	default:
 		postError(w, http.StatusMethodNotAllowed)
 		return
+	}
+}
+
+func usersGetAll(w http.ResponseWriter, r *http.Request) {
+	users, err := user.All()
+	if err != nil {
+		return nil, err
 	}
 }
 
