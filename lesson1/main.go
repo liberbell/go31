@@ -7,8 +7,8 @@ import (
 	"io"
 	"net/http"
 	"os"
-	"restapi/user"
 	"strings"
+	"user/user"
 
 	"gopkg.in/mgo.v2/bson"
 )
@@ -68,6 +68,7 @@ func bodyToUser(r *http.Request, u *user.User) error {
 	if err != nil {
 		return err
 	}
+	return json.Unmarshal(bd, u)
 }
 
 func usersGetAll(w http.ResponseWriter, r *http.Request) {
@@ -77,6 +78,10 @@ func usersGetAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	postBodyResponse(w, http.StatusOK, jsonResponse{"users": users})
+}
+
+func usersPostOne(w http.ResponseWriter, r *http.Request) {
+	u := new(user.User)
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
