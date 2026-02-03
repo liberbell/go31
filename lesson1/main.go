@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 	"restapi/user"
@@ -59,6 +60,13 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 func bodyToUser(r *http.Request, u *user.User) error {
 	if r.Body == nil {
 		return errors.New("request body is empty")
+	}
+	if u == nil {
+		return errors.New("a user is required")
+	}
+	bd, err := io.ReadAll(r.Body)
+	if err != nil {
+		return err
 	}
 }
 
