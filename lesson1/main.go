@@ -93,7 +93,10 @@ func usersPostOne(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		if err == user.ErrRecordInvalid {
 			postError(w, http.StatusBadRequest)
+		} else {
+			postError(w, http.StatusInternalServerError)
 		}
+		return
 	}
 }
 
