@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"restapi/user"
 	"strings"
 	"user/user"
 
@@ -82,6 +83,18 @@ func usersGetAll(w http.ResponseWriter, r *http.Request) {
 
 func usersPostOne(w http.ResponseWriter, r *http.Request) {
 	u := new(user.User)
+	err := bodyToUser(r, u)
+	if err != nil {
+		postError(w, http.StatusBadRequest)
+		return
+	}
+	u.ID = bson.NewObjectId()
+	err = u.Save()
+	if err != nil {
+		if err == user.ErrRecordInvalid {
+			postError(w, http.StatusBadRequest)
+		}
+	}
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
