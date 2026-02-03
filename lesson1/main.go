@@ -57,8 +57,10 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 func usersGetAll(w http.ResponseWriter, r *http.Request) {
 	users, err := user.All()
 	if err != nil {
-		return nil, err
+		postError(w, http.StatusInternalServerError)
+		return
 	}
+	postBodyResponse(w, http.StatusOK, jsonResponse{"users": users})
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
