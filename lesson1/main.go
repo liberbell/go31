@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"os"
@@ -52,6 +53,12 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 	default:
 		postError(w, http.StatusMethodNotAllowed)
 		return
+	}
+}
+
+func bodyToUser(r *http.Request, u *user.User) error {
+	if r.Body == nil {
+		return errors.New("request body is empty")
 	}
 }
 
