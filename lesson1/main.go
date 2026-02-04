@@ -108,6 +108,7 @@ func usersGetOne(w http.ResponseWriter, _ *http.Request, id bson.ObjectId) {
 	if err != nil {
 		if err == storm.ErrNotFound {
 			postError(w, http.StatusNotFound)
+			return
 		}
 	}
 }
