@@ -9,7 +9,6 @@ import (
 	"os"
 	"restapi/user"
 	"strings"
-	"user/user"
 
 	"gopkg.in/mgo.v2/bson"
 )
