@@ -102,6 +102,10 @@ func usersPostOne(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
+func usersGetOne(w http.ResponseWriter, _ *http.Request, id bson.ObjectId) {
+	u, err := user.One(id)
+}
+
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
 	if content != nil {
 		js, err := json.Marshal(content)
