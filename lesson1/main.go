@@ -10,6 +10,7 @@ import (
 	"restapi/user"
 	"strings"
 
+	"github.com/asdine/storm"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -104,6 +105,11 @@ func usersPostOne(w http.ResponseWriter, r *http.Request) {
 
 func usersGetOne(w http.ResponseWriter, _ *http.Request, id bson.ObjectId) {
 	u, err := user.One(id)
+	if err != nil {
+		if err == storm.ErrNotFound {
+			postError(w, http.StatusNotFound)
+		}
+	}
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
