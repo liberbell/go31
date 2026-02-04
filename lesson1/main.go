@@ -124,6 +124,8 @@ func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 		postError(w, http.StatusBadRequest)
 		return
 	}
+	u.ID = id
+	err = u.Save()
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
