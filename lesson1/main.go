@@ -110,6 +110,7 @@ func usersGetOne(w http.ResponseWriter, _ *http.Request, id bson.ObjectId) {
 			postError(w, http.StatusNotFound)
 			return
 		}
+		postError(w, http.StatusInternalServerError)
 	}
 }
 
