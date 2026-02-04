@@ -111,7 +111,9 @@ func usersGetOne(w http.ResponseWriter, _ *http.Request, id bson.ObjectId) {
 			return
 		}
 		postError(w, http.StatusInternalServerError)
+		return
 	}
+	postBodyResponse(w, http.StatusOK, jsonResponse{"user": u})
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
