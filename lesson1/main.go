@@ -132,7 +132,9 @@ func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 		} else {
 			postError(w, http.StatusInternalServerError)
 		}
+		return
 	}
+	w.Header().Set("Location", "/users"+u.ID.Hex())
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
