@@ -118,7 +118,12 @@ func usersGetOne(w http.ResponseWriter, _ *http.Request, id bson.ObjectId) {
 }
 
 func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
-
+	u := new(user.User)
+	err := bodyToUser(r, u)
+	if err != nil {
+		postError(w, http.StatusBadRequest)
+		return
+	}
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
