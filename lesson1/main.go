@@ -99,6 +99,7 @@ func usersPostOne(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Location", "/users/"+u.ID.Hex())
+	w.WriteHeader(http.StatusCreated)
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
