@@ -98,6 +98,7 @@ func usersPostOne(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
+	w.Header().Set("Location", "/users/"+u.ID.Hex())
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
