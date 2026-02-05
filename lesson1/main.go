@@ -138,6 +138,10 @@ func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	w.Header().Set("Location", "/users"+u.ID.Hex())
 }
 
+func userPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
+	u := new(user.User)
+}
+
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
 	if content != nil {
 		js, err := json.Marshal(content)
