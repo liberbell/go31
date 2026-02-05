@@ -139,13 +139,17 @@ func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 }
 
 func userPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
-	u := new(user.User)
-	err := bodyToUser(r, u)
+	u, err := user.One(id)
 	if err != nil {
-		postError(w, http.StatusBadRequest)
+		if err == stom.ErrNotFound {
+			postError(w, http.StatusNotFound)
+			return
+		}
+		postError(w, http.StatusInternalServerError)
 		return
 	}
-	u.ID = id
+	err := bodyToUser(r, u)
+
 	err = u.Save()
 	if err != nil {
 		if err == user.ErrRecordInvalid {
