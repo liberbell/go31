@@ -149,7 +149,12 @@ func userPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 		return
 	}
 	err = bodyToUser(r, u)
+	if err != nil {
+		postError(w, http.StatusBadRequest)
+		return
+	}
 
+	u.ID = id
 	err = u.Save()
 	if err != nil {
 		if err == user.ErrRecordInvalid {
