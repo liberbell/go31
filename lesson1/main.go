@@ -148,7 +148,7 @@ func userPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 		postError(w, http.StatusInternalServerError)
 		return
 	}
-	err := bodyToUser(r, u)
+	err = bodyToUser(r, u)
 
 	err = u.Save()
 	if err != nil {
