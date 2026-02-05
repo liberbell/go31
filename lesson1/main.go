@@ -145,6 +145,13 @@ func userPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 		postError(w, http.StatusBadRequest)
 		return
 	}
+	u.ID = id
+	err = u.Save()
+	if err != nil {
+		if err == user.ErrRecordInvalid {
+			postError()
+		}
+	}
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
