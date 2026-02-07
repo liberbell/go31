@@ -55,6 +55,7 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 		usersPatchOne(w, r, id)
 		return
 	case http.MethodDelete:
+		usersDeleteOne(w, r, id)
 		return
 	default:
 		postError(w, http.StatusMethodNotAllowed)
@@ -178,6 +179,7 @@ func usersDeleteOne(w http.ResponseWriter, _ *http.Request, id bson.ObjectId) {
 		postError(w, http.StatusInternalServerError)
 		return
 	}
+	w.WriteHeader(http.StatusOK)
 }
 
 func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
