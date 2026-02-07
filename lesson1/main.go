@@ -89,6 +89,11 @@ func usersGetAll(w http.ResponseWriter, r *http.Request) {
 		postError(w, http.StatusInternalServerError)
 		return
 	}
+
+	if r.Method == http.MethodHead {
+		postBodyResponse(w, http.StatusOK, jsonResponse{})
+		return
+	}
 	postBodyResponse(w, http.StatusOK, jsonResponse{"users": users})
 }
 
