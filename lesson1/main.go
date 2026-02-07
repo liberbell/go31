@@ -142,7 +142,7 @@ func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	u, err := user.One(id)
 	if err != nil {
-		if err == stom.ErrNotFound {
+		if err == storm.ErrNotFound {
 			postError(w, http.StatusNotFound)
 			return
 		}
