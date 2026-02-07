@@ -52,6 +52,7 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 		usersPutOne(w, r, id)
 		return
 	case http.MethodPatch:
+		usersPatchOne(w, r, id)
 		return
 	case http.MethodDelete:
 		return
@@ -138,7 +139,7 @@ func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	w.Header().Set("Location", "/users"+u.ID.Hex())
 }
 
-func userPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
+func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	u, err := user.One(id)
 	if err != nil {
 		if err == stom.ErrNotFound {
