@@ -34,9 +34,9 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 		case http.MethodHead:
 			usersGetAll(w, r)
 			return
-		case http.MethodOptions:
-			postOptionsResponse(w, []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}, nil)
-			return
+		// case http.MethodOptions:
+		// 	postOptionsResponse(w, []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}, nil)
+		// 	return
 		default:
 			postError(w, http.StatusMethodNotAllowed)
 			return
