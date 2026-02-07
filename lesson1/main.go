@@ -168,8 +168,8 @@ func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	w.Header().Set("Location", "/users"+u.ID.Hex())
 }
 
-func usersDeleteOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
-	u, err := user.One(id)
+func usersDeleteOne(w http.ResponseWriter, _ *http.Request, id bson.ObjectId) {
+	err := user.Delete(id)
 	if err != nil {
 		if err == storm.ErrNotFound {
 			postError(w, http.StatusNotFound)
