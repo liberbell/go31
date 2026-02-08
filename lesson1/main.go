@@ -76,6 +76,9 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 }
 
 func bodyToUser(r *http.Request, u *user.User) error {
+	if r == nil {
+		return errors.New("a request is required")
+	}
 	if r.Body == nil {
 		return errors.New("request body is empty")
 	}
