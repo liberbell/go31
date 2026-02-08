@@ -11,5 +11,12 @@ func TestBodyToUser(t *testing.T) {
 		txt string
 		r   *http.Request
 		u   *user.User
+		err bool
+		exp *user.User
+	}{
+		{
+			txt : "nil request",
+			err : true,
+		}
 	}
 }
