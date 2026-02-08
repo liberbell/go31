@@ -2,7 +2,7 @@ package handlers
 
 import (
 	"net/http"
-	"os/user"
+	"Lesson1/user"
 	"testing"
 	"reflect"
 )
