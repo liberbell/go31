@@ -23,5 +23,11 @@ func TestBodyToUser(t *testing.T) {
 	for _, tc := range ts {
 		t.Log(tc.txt)
 		err := BodyToUser(tc.r, tc.u)
+		if tc.err {
+			if err == nil {
+				t.Error("Expected error, got none")
+			}
+			continue
+		}
 	}
 }
