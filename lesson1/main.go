@@ -66,6 +66,8 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 	case http.MethodHead:
 		usersGetOne(w, r, id)
 		return
+	case http.MethodOptions:
+		postOptionsResponse(w, []string{http.MethodGet, http.MethodPost})
 	default:
 		postError(w, http.StatusMethodNotAllowed)
 		return
@@ -218,6 +220,7 @@ func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
 
 func postOptionsResponse(w http.ResponseWriter, methods []string, content jsonResponse) {
 	w.Header().Set("Allow", strings.Join(methods, ","))
+	postBodyResponse(w, http.StatusOK, content)
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
