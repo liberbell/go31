@@ -216,8 +216,8 @@ func postBodyResponse(w http.ResponseWriter, code int, content jsonResponse) {
 	w.Write([]byte(http.StatusText(code)))
 }
 
-func postOptionsResponse(w http.ResponseWriter, method []string, content jsonResponse) {
-	w.Header().Set("Allow", strings.Join(method, ","))
+func postOptionsResponse(w http.ResponseWriter, methods []string, content jsonResponse) {
+	w.Header().Set("Allow", strings.Join(methods, ","))
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
