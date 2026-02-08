@@ -67,7 +67,7 @@ func usersRouter(w http.ResponseWriter, r *http.Request) {
 		usersGetOne(w, r, id)
 		return
 	case http.MethodOptions:
-		postOptionsResponse(w, []string{http.MethodGet, http.MethodPut, http.MethodDelete, http.MethodPatch http.MethodHead, http.MethodOptions}, nil)
+		postOptionsResponse(w, []string{http.MethodGet, http.MethodPut, http.MethodDelete, http.MethodPatch, http.MethodHead, http.MethodOptions}, nil)
 		return
 	default:
 		postError(w, http.StatusMethodNotAllowed)
