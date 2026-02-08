@@ -22,7 +22,8 @@ func TestBodyToUser(t *testing.T) {
 		{
 			txt: "empty request body",
 			r: &http.Request{},
-		}
+			err: true,
+		},
 	}
 
 	for _, tc := range ts {
