@@ -21,6 +21,7 @@ func TestBodyToUser(t *testing.T) {
 	}
 
 	for _, tc := range ts {
-		t.Log()
+		t.Log(tc.txt)
+		err := BodyToUser(tc.r, tc.u)
 	}
 }
