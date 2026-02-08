@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"os/user"
 	"testing"
+	"reflect"
 )
 
 func TestBodyToUser(t *testing.T) {
