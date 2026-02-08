@@ -17,6 +17,10 @@ func TestBodyToUser(t *testing.T) {
 		{
 			txt : "nil request",
 			err : true,
-		}
+		},
+	}
+
+	for _, tc := range ts {
+		t.Log()
 	}
 }
