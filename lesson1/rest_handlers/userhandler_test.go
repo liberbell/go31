@@ -19,6 +19,10 @@ func TestBodyToUser(t *testing.T) {
 			txt : "nil request",
 			err : true,
 		},
+		{
+			txt: "empty request body",
+			r: &http.Request{},
+		}
 	}
 
 	for _, tc := range ts {
