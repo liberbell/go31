@@ -34,7 +34,7 @@ func TestBodyToUser(t *testing.T) {
 			continue
 		}
 		if !reflect.DeepEqual(tc.u, tc.exp) {
-			t.Error()
+			t.Error("Unmarshalled data is different:")
 		}
 	}
 }
