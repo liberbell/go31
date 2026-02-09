@@ -31,7 +31,7 @@ func TestBodyToUser(t *testing.T) {
 			r: &http.Request{
 				Body: ioutil.NopCloser(bytes.NewBufferString(`{"id": 12}`)),
 			},
-			u: &user.User{}
+			u: &user.User{},
 			err: true,
 		},
 		{
