@@ -14,6 +14,9 @@ func TestBodyToUser(t *testing.T) {
 		Role: "",
 	}
 	js, err : = json.Marshal(valid)
+	if err != nil {
+		t.Errorf("Error marchalling a valid user: %s", err)
+	}
 	ts := []struct {
 		txt string
 		r   *http.Request
