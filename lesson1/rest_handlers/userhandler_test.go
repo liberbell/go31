@@ -21,6 +21,13 @@ func TestBodyToUser(t *testing.T) {
 		},
 		{
 			txt: "empty request body",
+			r: &http.Request{
+				Body: bytes.NewBufferString("{}")
+			},
+			err: true,
+		},
+		{
+			txt: "empty user",
 			r: &http.Request{},
 			err: true,
 		},
