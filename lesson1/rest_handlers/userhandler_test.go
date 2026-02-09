@@ -22,7 +22,7 @@ func TestBodyToUser(t *testing.T) {
 		{
 			txt: "empty request body",
 			r: &http.Request{
-				Body: bytes.NewBufferString("{}")
+				Body: ioutil.NopCloser(bytes.NewBufferString("{}")),
 			},
 			err: true,
 		},
