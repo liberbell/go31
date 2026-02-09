@@ -47,7 +47,15 @@ func TestBodyToUser(t *testing.T) {
 		{
 			txt: "valid request",
 			r: &http.Request{
-				Body: ioutil.NopCloser(bytes.NewBufferString(js)),
+				Body: ioutil.NopCloser(bytes.NewBuffer(js)),
+			},
+			u: &user.User{},
+			exp: valid,
+		},
+		{
+			txt: "valid request",
+			r: &http.Request{
+				Body: ioutil.NopCloser(bytes.NewBufferString(`{"role": "Developer", "age": 22}`)),
 			},
 			u: &user.User{},
 			exp: valid,
