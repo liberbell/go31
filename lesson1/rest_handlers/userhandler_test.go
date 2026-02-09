@@ -8,6 +8,12 @@ import (
 )
 
 func TestBodyToUser(t *testing.T) {
+	valid := &user.User{
+		ID: bson.NewObjectId(),
+		Name: "John",
+		Role: "",
+	}
+	js, err : = json.Marshal(valid)
 	ts := []struct {
 		txt string
 		r   *http.Request
