@@ -13,6 +13,11 @@ func TestBodyToUser(t *testing.T) {
 		Name: "John",
 		Role: "",
 	}
+	valid2 := &user.User{
+		ID: bson.NewObjectId(),
+		Name: "John",
+		Role: "",
+	}
 	js, err : = json.Marshal(valid)
 	if err != nil {
 		t.Errorf("Error marchalling a valid user: %s", err)
@@ -53,7 +58,7 @@ func TestBodyToUser(t *testing.T) {
 			exp: valid,
 		},
 		{
-			txt: "valid request",
+			txt: "valid partial request",
 			r: &http.Request{
 				Body: ioutil.NopCloser(bytes.NewBufferString(`{"role": "Developer", "age": 22}`)),
 			},
