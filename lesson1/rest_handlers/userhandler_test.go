@@ -16,6 +16,7 @@ func TestBodyToUser(t *testing.T) {
 	js, err : = json.Marshal(valid)
 	if err != nil {
 		t.Errorf("Error marchalling a valid user: %s", err)
+		t.FailNow()
 	}
 	ts := []struct {
 		txt string
@@ -42,6 +43,13 @@ func TestBodyToUser(t *testing.T) {
 			},
 			u: &user.User{},
 			err: true,
+		},
+		{
+			txt: "valid request",
+			r: &http.Request{
+				Body: ioutil.NopCloser(bytes.NewBufferString(js)),
+			},
+			u: &user.User{},
 		},
 		{
 			txt: "empty user",
