@@ -50,7 +50,7 @@ func TestBodyToUser(t *testing.T) {
 				Body: ioutil.NopCloser(bytes.NewBufferString(js)),
 			},
 			u: &user.User{},
-			exp:
+			exp: valid,
 		},
 		{
 			txt: "empty user",
