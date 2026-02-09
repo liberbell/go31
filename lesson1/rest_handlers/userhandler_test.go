@@ -27,6 +27,14 @@ func TestBodyToUser(t *testing.T) {
 			err: true,
 		},
 		{
+			txt: "malformed data",
+			r: &http.Request{
+				Body: ioutil.NopCloser(bytes.NewBufferString(`{"id": 12}`)),
+			},
+			u: &user.User{}
+			err: true,
+		},
+		{
 			txt: "empty user",
 			r: &http.Request{},
 			err: true,
