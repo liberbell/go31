@@ -14,9 +14,9 @@ func TestBodyToUser(t *testing.T) {
 		Role: "",
 	}
 	valid2 := &user.User{
-		ID: bson.NewObjectId(),
+		ID: valid.ID,
 		Name: "John",
-		Role: "",
+		Role: "Developer",
 	}
 	js, err : = json.Marshal(valid)
 	if err != nil {
