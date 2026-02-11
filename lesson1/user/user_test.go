@@ -9,6 +9,8 @@ import (
 func TestCRUD(t *testing.T) {
 	t.Log("Create")
 	u := &User{
-		ID: bson.NewObjectId(),
+		ID:   bson.NewObjectId(),
+		Name: "John",
+		Role: "Tester",
 	}
 }
