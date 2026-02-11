@@ -23,5 +23,8 @@ func TestCRUD(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error retrieving a record: %s", err)
 	}
-	if !reflect.DeepEqual(u2, u)
+	if !reflect.DeepEqual(u2, u) {
+		t.Error("Records do not match")
+	}
+	t.Log("Update")
 }
