@@ -13,4 +13,13 @@ func TestCRUD(t *testing.T) {
 		Name: "John",
 		Role: "Tester",
 	}
+	err := u.Save()
+	if err != nil {
+		t.Fatalf("Error saving a record: %s", err)
+	}
+	t.Log("Read")
+	u2, err := One(u.ID)
+	if err != nil {
+		t.Fatalf("Error saving a record: %s", err)
+	}
 }
