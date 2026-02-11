@@ -32,4 +32,12 @@ func TestCRUD(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error saving a record: %s", err)
 	}
+	u3, err := One(u.ID)
+	if err != nil {
+		t.Fatalf("Error retrieving a record: %s", err)
+	}
+	if !reflect.DeepEqual(u3, u) {
+		t.Error("Records do not match")
+	}
+	t.Log("Delete")
 }
