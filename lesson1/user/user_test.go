@@ -40,4 +40,5 @@ func TestCRUD(t *testing.T) {
 		t.Error("Records do not match")
 	}
 	t.Log("Delete")
+	err = Delete(u.ID)
 }
