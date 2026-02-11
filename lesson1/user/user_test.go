@@ -52,4 +52,7 @@ func TestCRUD(t *testing.T) {
 	if err != storm.ErrNotFound {
 		t.Fatalf("Error retrieving non-existing record: %s", err)
 	}
+
+	t.Log("Read all")
+	u2.ID = bson.NewObjectId()
 }
