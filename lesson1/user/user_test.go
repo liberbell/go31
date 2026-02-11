@@ -41,4 +41,11 @@ func TestCRUD(t *testing.T) {
 	}
 	t.Log("Delete")
 	err = Delete(u.ID)
+	if err != nil {
+		t.Fatalf("Error removing a record: %s", err)
+	}
+	_, err = One(u.ID)
+	if err != nil {
+		t.Fatal("Record shoud not exist anymore")
+	}
 }
