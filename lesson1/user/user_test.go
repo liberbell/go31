@@ -27,4 +27,9 @@ func TestCRUD(t *testing.T) {
 		t.Error("Records do not match")
 	}
 	t.Log("Update")
+	u.Role = "developer"
+	err = u.Save()
+	if err != nil {
+		t.Fatalf("Error saving a record: %s", err)
+	}
 }
