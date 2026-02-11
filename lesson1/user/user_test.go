@@ -4,6 +4,7 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/asdine/storm"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -47,5 +48,8 @@ func TestCRUD(t *testing.T) {
 	_, err = One(u.ID)
 	if err != nil {
 		t.Fatal("Record shoud not exist anymore")
+	}
+	if err != storm.ErrNotFound {
+		t.Fatalf("Error retrieving non-existing record: %s", err)
 	}
 }
