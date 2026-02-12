@@ -74,4 +74,7 @@ func TestCRUD(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error reading all records: %s", err)
 	}
+	if len(users) != 3 {
+		t.Errorf("Different number of records retrieved. Expected 3 / Actual: %d", len(users))
+	}
 }
