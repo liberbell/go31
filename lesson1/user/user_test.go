@@ -8,6 +8,10 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+func TestMain(m *testing.M) {
+	m.Run()
+}
+
 #test
 func TestCRUD(t *testing.T) {
 	t.Log("Create")
