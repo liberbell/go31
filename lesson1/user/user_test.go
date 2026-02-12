@@ -56,4 +56,9 @@ func TestCRUD(t *testing.T) {
 
 	t.Log("Read all")
 	u2.ID = bson.NewObjectId()
+	u3.ID = bson.NewObjectID()
+	err = u.Save()
+	if err != nil {
+		t.Fatalf("Error saving ")
+	}
 }
