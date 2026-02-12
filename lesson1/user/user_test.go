@@ -59,6 +59,14 @@ func TestCRUD(t *testing.T) {
 	u3.ID = bson.NewObjectID()
 	err = u.Save()
 	if err != nil {
+		t.Fatalf("Error saving a record: %s", err)
+	}
+	err = u2.Save()
+	if err != nil {
+		t.Fatalf("Error saving ")
+	}
+	err = u3.Save()
+	if err != nil {
 		t.Fatalf("Error saving ")
 	}
 }
