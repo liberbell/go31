@@ -10,6 +10,7 @@ import (
 
 func TestMain(m *testing.M) {
 	m.Run()
+	os.Remove(dbPath)
 }
 
 #test
