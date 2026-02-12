@@ -17,6 +17,11 @@ func BenchmarkCRUD(b *benchmark.B) {
 	os.Remove(dbPath)
 
 	t.Log("Create")
+	u := &User{
+		ID: bson.NewObjectID(),
+		Name: "John",
+		Role: "Tester"
+	}
 }
 
 #test
