@@ -13,6 +13,12 @@ func TestMain(m *testing.M) {
 	os.Remove(dbPath)
 }
 
+func BenchmarkCRUD(b *benchmark.B) {
+	os.Remove(dbPath)
+
+	t.Log("Create")
+}
+
 #test
 func TestCRUD(t *testing.T) {
 	t.Log("Create")
