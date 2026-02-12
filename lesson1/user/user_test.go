@@ -31,6 +31,9 @@ func BenchmarkCRUD(b *benchmark.B) {
 	if err != nil {
 		t.Fatalf("Error retrieving a record: %s", err)
 	}
+	if !reflect.DeepEqual(u2, u) {
+		t.Error("Records do not match")
+	}
 }
 
 #test
