@@ -8,6 +8,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+#test
 func TestCRUD(t *testing.T) {
 	t.Log("Create")
 	u := &User{
