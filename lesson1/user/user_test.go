@@ -63,10 +63,10 @@ func TestCRUD(t *testing.T) {
 	}
 	err = u2.Save()
 	if err != nil {
-		t.Fatalf("Error saving ")
+		t.Fatalf("Error saving a record: %s", err)
 	}
 	err = u3.Save()
 	if err != nil {
-		t.Fatalf("Error saving ")
+		t.Fatalf("Error saving a record: %s", err)
 	}
 }
