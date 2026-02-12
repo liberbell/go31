@@ -69,4 +69,9 @@ func TestCRUD(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Error saving a record: %s", err)
 	}
+
+	users, err := All()
+	if err != nil {
+		t.Fatalf("Error reading all records: %s", err)
+	}
 }
