@@ -34,6 +34,17 @@ func BenchmarkCRUD(b *benchmark.B) {
 	if !reflect.DeepEqual(u2, u) {
 		t.Error("Records do not match")
 	}
+	u.Role = "developer"
+	err = u.Save()
+	if err != nil {
+		t.Fatalf("Error saving a record: %s", err)
+	}
+	u3, err := One(u.ID)
+	t.Log("Delete")
+	err = Delete(u.ID)
+	if err != nil {
+		t.
+	}
 }
 
 #test
