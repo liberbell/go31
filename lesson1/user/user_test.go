@@ -1,6 +1,7 @@
 package user
 
 import (
+	"os"
 	"reflect"
 	"testing"
 
@@ -18,7 +19,7 @@ func BenchmarkCRUD(b *benchmark.B) {
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		u := &User{
-			ID: bson.NewObjectId(),
+			ID:   bson.NewObjectId(),
 			Name: "John",
 			Role: "Tester",
 		}
@@ -36,40 +37,14 @@ func BenchmarkCRUD(b *benchmark.B) {
 		if err != nil {
 			b.Fatalf("Error saving a record: %s", err)
 		}
-	}
 
-	t.Log("Create")
-	u := &User{
-		ID: bson.NewObjectID(),
-		Name: "John",
-		Role: "Tester"
-	}
-	err := u.Save()
-	if err != nil {
-		t.Fatalf("Error saving a record: %s", err)
-	}
-	t.Log("Read")
-	u2, err := One(u.ID)
-	if err != nil {
-		t.Fatalf("Error retrieving a record: %s", err)
-	}
-	if !reflect.DeepEqual(u2, u) {
-		t.Error("Records do not match")
-	}
-	u.Role = "developer"
-	err = u.Save()
-	if err != nil {
-		t.Fatalf("Error saving a record: %s", err)
-	}
-	u3, err := One(u.ID)
-	t.Log("Delete")
-	err = Delete(u.ID)
-	if err != nil {
-		t.
+		err = Delete(u.ID)
+		if err != nil {
+			b.Fatalf("Error removing a record: %s", err)
+		}
 	}
 }
 
-#test
 func TestCRUD(t *testing.T) {
 	t.Log("Create")
 	u := &User{
