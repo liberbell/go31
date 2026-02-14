@@ -47,6 +47,57 @@ func BenchmarkCreate(b *testing.B) {
 	}
 }
 
+func BenchmarkRead(b *testing.B) {
+	CleanDb(b)
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		u := &User{
+			ID:   bson.NewObjectId(),
+			Name: "John_" + strconv.Itoa(i),
+			Role: "Tester",
+		}
+		b.StartTimer()
+		err := u.Save()
+		if err != nil {
+			b.Fatalf("Error saving a record: %s", err)
+		}
+	}
+}
+
+func BenchmarkUpdate(b *testing.B) {
+	CleanDb(b)
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		u := &User{
+			ID:   bson.NewObjectId(),
+			Name: "John_" + strconv.Itoa(i),
+			Role: "Tester",
+		}
+		b.StartTimer()
+		err := u.Save()
+		if err != nil {
+			b.Fatalf("Error saving a record: %s", err)
+		}
+	}
+}
+
+func BenchmarkDelete(b *testing.B) {
+	CleanDb(b)
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		u := &User{
+			ID:   bson.NewObjectId(),
+			Name: "John_" + strconv.Itoa(i),
+			Role: "Tester",
+		}
+		b.StartTimer()
+		err := u.Save()
+		if err != nil {
+			b.Fatalf("Error saving a record: %s", err)
+		}
+	}
+}
+
 func BenchmarkCRUD(b *testing.B) {
 	os.Remove(dbPath)
 	b.ResetTimer()
