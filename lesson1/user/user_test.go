@@ -95,6 +95,22 @@ func BenchmarkDelete(b *testing.B) {
 		if err != nil {
 			b.Fatalf("Error saving a record: %s", err)
 		}
+
+		_, err = One(u.ID)
+		if err != nil {
+			b.Fatalf("Error sretrieving a record: %s", err)
+		}
+
+		u.Role = "developer"
+		err = u.Save()
+		if err != nil {
+			b.Fatalf("Error saving a record: %s", err)
+		}
+
+		err = Delete(u.ID)
+		if err != nil {
+			b.Fatalf("Error removing a record: %s", err)
+		}
 	}
 }
 
