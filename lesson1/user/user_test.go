@@ -20,6 +20,11 @@ func BenchmarkCRUD(b *benchmark.B) {
 		u := &User{
 			ID: bson.NewObjectId(),
 			Name: "John",
+			Role: "Tester",
+		}
+		err := u.Save()
+		if err != nil {
+			b.Fatalf("Error saving a record: %s", err)
 		}
 	}
 
