@@ -18,11 +18,13 @@ func BenchmarkCreate(b *testing.B) {
 	os.Remove(dbPath)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
+		b.StopTimer()
 		u := &User{
 			ID:   bson.NewObjectId(),
 			Name: "John",
 			Role: "Tester",
 		}
+		b.StartTimer()
 		err := u.Save()
 		if err != nil {
 			b.Fatalf("Error saving a record: %s", err)
