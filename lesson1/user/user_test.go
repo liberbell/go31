@@ -19,7 +19,7 @@ func CleanDb(b *testing.B) {
 	os.Remove(dbPath)
 	u := &User{
 		ID:   bson.NewObjectId(),
-		Name: "John_" + strconv.Itoa(i),
+		Name: "John",
 		Role: "Tester",
 	}
 
@@ -31,8 +31,7 @@ func CleanDb(b *testing.B) {
 }
 
 func BenchmarkCreate(b *testing.B) {
-	os.Remove(dbPath)
-	b.ResetTimer()
+	CleanDb(b)
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		u := &User{
