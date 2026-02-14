@@ -15,6 +15,13 @@ func TestMain(m *testing.M) {
 
 func BenchmarkCRUD(b *benchmark.B) {
 	os.Remove(dbPath)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		u := &User{
+			ID: bson.NewObjectId(),
+			Name: "John",
+		}
+	}
 
 	t.Log("Create")
 	u := &User{
