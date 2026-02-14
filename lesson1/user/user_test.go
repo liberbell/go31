@@ -3,6 +3,7 @@ package user
 import (
 	"os"
 	"reflect"
+	"strconv"
 	"testing"
 
 	"github.com/asdine/storm"
@@ -21,7 +22,7 @@ func BenchmarkCreate(b *testing.B) {
 		b.StopTimer()
 		u := &User{
 			ID:   bson.NewObjectId(),
-			Name: "John",
+			Name: "John_" + strconv.Itoa(i),
 			Role: "Tester",
 		}
 		b.StartTimer()
