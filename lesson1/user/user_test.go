@@ -26,9 +26,15 @@ func BenchmarkCRUD(b *benchmark.B) {
 		if err != nil {
 			b.Fatalf("Error saving a record: %s", err)
 		}
-		u2, err := One(u.ID)
+		_, err = One(u.ID)
 		if err != nil {
 			b.Fatalf("Error sretrieving a record: %s", err)
+		}
+
+		u.Role = "developer"
+		err = u.Save()
+		if err != nil {
+			b.Fatalf("Error saving a record: %s", err)
 		}
 	}
 
