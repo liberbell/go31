@@ -202,10 +202,12 @@ func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 		}
 		return
 	}
+	cache.Drop("/users")
+	cache.Drop(cache.MakeResource(r))
 	w.Header().Set("Location", "/users"+u.ID.Hex())
 }
 
-func usersDeleteOne(w http.ResponseWriter, _ *http.Request, id bson.ObjectId) {
+func usersDeleteOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	err := user.Delete(id)
 	if err != nil {
 		if err == storm.ErrNotFound {
@@ -215,6 +217,8 @@ func usersDeleteOne(w http.ResponseWriter, _ *http.Request, id bson.ObjectId) {
 		postError(w, http.StatusInternalServerError)
 		return
 	}
+	cache.Drop("/users")
+	cache.Drop(cache.MakeResource(r))
 	w.WriteHeader(http.StatusOK)
 }
 
