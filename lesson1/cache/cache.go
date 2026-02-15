@@ -58,3 +58,9 @@ func Clean() {
 func Drop(res string) {
 	set(res, nil)
 }
+
+func Serv(w http.ResponseWriter, r *http.Request) bool {
+	if w == nil || r == nil {
+		return false
+	}
+}
