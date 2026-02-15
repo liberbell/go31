@@ -45,7 +45,7 @@ func get(resource string) *response {
 func copyHeader(src, dst http.Header) {
 	for key, list := range src {
 		for _, value := range list {
-			dst.Add()
+			dst.Add(key, value)
 		}
 	}
 }
