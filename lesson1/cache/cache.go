@@ -63,4 +63,12 @@ func Serv(w http.ResponseWriter, r *http.Request) bool {
 	if w == nil || r == nil {
 		return false
 	}
+	if r.Header.Get("Cache-Control") == "no-cache" {
+		return false
+	}
+
+	resp := get(MakeResource(r))
+	if resp == nil {
+		return false
+	}
 }
