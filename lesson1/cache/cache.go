@@ -1,9 +1,17 @@
 package cache
 
-import "net/http"
+import (
+	"net/http"
+	"sync"
+)
 
 type response struct {
 	header http.Header
 	code   int
 	body   []byte
+}
+
+type memCache struct {
+	lock sync.RWMutex
+	data map[string]response
 }
