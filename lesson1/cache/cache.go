@@ -42,6 +42,14 @@ func get(resource string) *response {
 	return nil
 }
 
+func copyHeader(src, dst http.Header) {
+	for key, list := range src {
+		for _, value := range list {
+			dst.Add()
+		}
+	}
+}
+
 func MakeResource(r *http.Request) string {
 	if r == nil {
 		return ""
@@ -70,5 +78,10 @@ func Serv(w http.ResponseWriter, r *http.Request) bool {
 	resp := get(MakeResource(r))
 	if resp == nil {
 		return false
+	}
+
+	w.WriteHeader(resp.code)
+	if r.Method != http.MethodHead {
+		w.Write(resp.body)
 	}
 }
