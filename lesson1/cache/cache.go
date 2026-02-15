@@ -19,3 +19,7 @@ type memCache struct {
 var (
 	cache = memCache{data: map[string]response{}}
 )
+
+func set(resource string, response *response) {
+	cache.lock.Lock()
+}
