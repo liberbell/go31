@@ -7,6 +7,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"restapi/cache"
 	"restapi/user"
 	"strings"
 
@@ -93,6 +94,10 @@ func bodyToUser(r *http.Request, u *user.User) error {
 }
 
 func usersGetAll(w http.ResponseWriter, r *http.Request) {
+	if cache.Serve(w, r) {
+		return
+	}
+
 	users, err := user.All()
 	if err != nil {
 		postError(w, http.StatusInternalServerError)
