@@ -15,3 +15,7 @@ type memCache struct {
 	lock sync.RWMutex
 	data map[string]response
 }
+
+var (
+	cache = memCache{data: map[string]response{}}
+)
