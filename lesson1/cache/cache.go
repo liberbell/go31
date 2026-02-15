@@ -2,6 +2,7 @@ package cache
 
 import (
 	"net/http"
+	"strings"
 	"sync"
 )
 
@@ -45,4 +46,5 @@ func MakeResource(r *http.Request) string {
 	if r == nil {
 		return ""
 	}
+	return strings.TrimSuffix(r.URL.RequestURI(), "/")
 }
