@@ -32,5 +32,11 @@ func set(resource string, response *response) {
 }
 
 func get(resource string) *response {
-	cache.lock.Lock()
+	cache.lock.RLock()
+	resp, ok := cache.data[resource]
+	cache.lock.RUnlock()
+	if ok {
+		return &resp
+	}
+	return nil
 }
