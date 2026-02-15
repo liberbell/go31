@@ -128,6 +128,7 @@ func usersPostOne(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
+	cache.Drop("/users")
 	w.Header().Set("Location", "/users/"+u.ID.Hex())
 	w.WriteHeader(http.StatusCreated)
 }
