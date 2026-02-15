@@ -30,3 +30,7 @@ func set(resource string, response *response) {
 	}
 	cache.lock.Unlock()
 }
+
+func get(resource string) *response {
+	cache.lock.Lock()
+}
