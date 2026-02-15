@@ -22,4 +22,8 @@ var (
 
 func set(resource string, response *response) {
 	cache.lock.Lock()
+
+	if response == nil {
+		delete(cache.data, resource)
+	}
 }
