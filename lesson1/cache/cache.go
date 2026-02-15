@@ -67,7 +67,7 @@ func Drop(res string) {
 	set(res, nil)
 }
 
-func Serv(w http.ResponseWriter, r *http.Request) bool {
+func Serve(w http.ResponseWriter, r *http.Request) bool {
 	if w == nil || r == nil {
 		return false
 	}
@@ -80,8 +80,10 @@ func Serv(w http.ResponseWriter, r *http.Request) bool {
 		return false
 	}
 
+	copyHeader(resp.header, w.Header())
 	w.WriteHeader(resp.code)
 	if r.Method != http.MethodHead {
 		w.Write(resp.body)
 	}
+	return true
 }
