@@ -40,3 +40,9 @@ func get(resource string) *response {
 	}
 	return nil
 }
+
+func MakeResource(r *http.Request) string {
+	if r == nil {
+		return ""
+	}
+}
