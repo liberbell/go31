@@ -133,6 +133,10 @@ func usersPostOne(w http.ResponseWriter, r *http.Request) {
 }
 
 func usersGetOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
+	if cache.Serve(w, r) {
+		return
+	}
+
 	u, err := user.One(id)
 	if err != nil {
 		if err == storm.ErrNotFound {
