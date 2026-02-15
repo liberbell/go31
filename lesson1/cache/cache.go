@@ -54,3 +54,7 @@ func Clean() {
 	cache.data = map[string]response{}
 	cache.lock.Unlock()
 }
+
+func Drop(res string) {
+	set(res, nil)
+}
