@@ -48,3 +48,7 @@ func MakeResource(r *http.Request) string {
 	}
 	return strings.TrimSuffix(r.URL.RequestURI(), "/")
 }
+
+func Clean() {
+	cache.lock.Lock()
+}
