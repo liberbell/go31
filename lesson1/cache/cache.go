@@ -25,5 +25,8 @@ func set(resource string, response *response) {
 
 	if response == nil {
 		delete(cache.data, resource)
+	} else {
+		cache.data[resource] = *response
 	}
+	cache.lock.Unlock()
 }
