@@ -51,4 +51,6 @@ func MakeResource(r *http.Request) string {
 
 func Clean() {
 	cache.lock.Lock()
+	cache.data = map[string]response{}
+	cache.lock.Unlock()
 }
