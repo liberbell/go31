@@ -34,4 +34,7 @@ func (w *Writer) WriteHeader(code int) {
 
 func (w *Writer) Write(b []byte) (int, error) {
 	w.response.body = make([]byte, len(b))
+	for k, v := range b {
+		w.response.body[k] = v
+	}
 }
