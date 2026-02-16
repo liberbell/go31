@@ -29,5 +29,9 @@ func (w *Writer) Header() http.Header {
 func (w *Writer) WriteHeader(code int) {
 	copyHeader(w.response.header, w.writer.Header())
 	w.response.code = code
-	w.Writer.WriteHeader(code)
+	w.writer.WriteHeader(code)
+}
+
+func (w *Writer) Write(b []byte) (int, error) {
+	w.response.body = make([]byte, len(b))
 }
