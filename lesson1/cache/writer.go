@@ -7,3 +7,7 @@ type Writer struct {
 	response response
 	resource string
 }
+
+var (
+	_ http.ResponseWriter = (*Writer)(nil)
+)
