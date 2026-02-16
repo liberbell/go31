@@ -37,4 +37,6 @@ func (w *Writer) Write(b []byte) (int, error) {
 	for k, v := range b {
 		w.response.body[k] = v
 	}
+	copyHeader(w.Header(), w.writer.Header())
+	set(w.resource, &w.response)
 }
