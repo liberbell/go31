@@ -39,4 +39,5 @@ func (w *Writer) Write(b []byte) (int, error) {
 	}
 	copyHeader(w.Header(), w.writer.Header())
 	set(w.resource, &w.response)
+	return w.writer.Write(b)
 }
