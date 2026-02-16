@@ -21,3 +21,7 @@ func NewWriter(w http.ResponseWriter, r *http.Request) *Writer {
 		},
 	}
 }
+
+func (w *Writer) Header() http.Header {
+	return w.response.header
+}
