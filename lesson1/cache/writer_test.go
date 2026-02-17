@@ -18,3 +18,7 @@ func (mw *mockWriter) Write(b []byte) (int, error) {
 	}
 	return len(b), nil
 }
+
+func (mw *mockWriter) WriteHeader(code int) {
+	mw.code = code
+}
