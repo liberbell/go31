@@ -109,7 +109,7 @@ func usersGetAll(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	cw := cache.NewWriter(w, r)
-	postBodyResponse(w, http.StatusOK, jsonResponse{"users": users})
+	postBodyResponse(cw, http.StatusOK, jsonResponse{"users": users})
 }
 
 func usersPostOne(w http.ResponseWriter, r *http.Request) {
