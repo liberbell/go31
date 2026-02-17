@@ -1,6 +1,9 @@
 package cache
 
-import "net/http"
+import (
+	"net/http"
+	"testing"
+)
 
 type mockWriter response
 
@@ -25,4 +28,8 @@ func (mw *mockWriter) WriteHeader(code int) {
 
 func (mw *mockWriter) Header() http.Header {
 	return mw.header
+}
+
+func TestWriter(t *testing.T) {
+	mw := newMockWriter()
 }
