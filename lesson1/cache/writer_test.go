@@ -22,3 +22,7 @@ func (mw *mockWriter) Write(b []byte) (int, error) {
 func (mw *mockWriter) WriteHeader(code int) {
 	mw.code = code
 }
+
+func (mw *mockWriter) Header() http.Header {
+	return mw.header
+}
