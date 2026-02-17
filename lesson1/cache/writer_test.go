@@ -2,6 +2,7 @@ package cache
 
 import (
 	"net/http"
+	"net/url"
 	"testing"
 )
 
@@ -32,4 +33,10 @@ func (mw *mockWriter) Header() http.Header {
 
 func TestWriter(t *testing.T) {
 	mw := newMockWriter()
+
+	res := "/test/url?with=params"
+	u, err := url.Parse(res)
+	if err != nil {
+		t.Fatal("Invalid url")
+	}
 }
