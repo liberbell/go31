@@ -205,8 +205,8 @@ func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 		return
 	}
 	cache.Drop("/users")
-	cache.Drop(cache.MakeResource(r))
-	w.Header().Set("Location", "/users"+u.ID.Hex())
+	cw := cache.NewWriter(w, r)
+	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
 }
 
 func usersDeleteOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
