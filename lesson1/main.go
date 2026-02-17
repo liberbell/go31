@@ -152,7 +152,8 @@ func usersGetOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 		postBodyResponse(w, http.StatusOK, jsonResponse{})
 		return
 	}
-	postBodyResponse(w, http.StatusOK, jsonResponse{"user": u})
+	cw := cache.NewWriter(w, r)
+	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
 }
 
 func usersPutOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
