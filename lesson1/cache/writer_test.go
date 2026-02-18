@@ -44,4 +44,8 @@ func TestWriter(t *testing.T) {
 		URL: u,
 	}
 	t.Log("test NewWriter")
+	w := NewWriter(mw, req)
+	if w.resource != res {
+		t.Errorf("Resources are different, Expected: %s / Actual: %s", res, w.resource)
+	}
 }
