@@ -39,4 +39,9 @@ func TestWriter(t *testing.T) {
 	if err != nil {
 		t.Fatal("Invalid url")
 	}
+
+	req := &http.Request{
+		URL: u,
+	}
+	t.Log("test NewWriter")
 }
