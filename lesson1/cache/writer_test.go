@@ -68,7 +68,12 @@ func TestWriter(t *testing.T) {
 	if w.response.code != c {
 		t.Error("Status code not stored")
 	}
-	if mw.response.code != c {
-		t.Error("Status code not stored")
+	if mw.code != c {
+		t.Error("Status code not written")
+	}
+
+	h2 = w.response.header
+	if h2.Get("test") != "value" {
+		t.Error("Value not stored in the header")
 	}
 }
