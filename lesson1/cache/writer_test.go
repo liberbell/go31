@@ -48,4 +48,11 @@ func TestWriter(t *testing.T) {
 	if w.resource != res {
 		t.Errorf("Resources are different, Expected: %s / Actual: %s", res, w.resource)
 	}
+
+	if w.writer != mw {
+		t.Fatal("Writer not assigned")
+	}
+
+	t.Log("test Header")
+	h := w.Header()
 }
