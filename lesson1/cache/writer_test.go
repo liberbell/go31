@@ -55,4 +55,10 @@ func TestWriter(t *testing.T) {
 
 	t.Log("test Header")
 	h := w.Header()
+	h.Add("test", "value")
+
+	h2 := w.response.header
+	if h2.Get("test") != "value" {
+		t.Error("Value not stored in the header")
+	}
 }
