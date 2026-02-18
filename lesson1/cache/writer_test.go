@@ -79,4 +79,8 @@ func TestWriter(t *testing.T) {
 
 	t.Log("test Write")
 	bd := []byte{1, 2, 3, 4, 5}
+	n, err := w.Write(bd)
+	if err != nil {
+		t.Fatalf("Unexpected error while writing: %s", err)
+	}
 }
