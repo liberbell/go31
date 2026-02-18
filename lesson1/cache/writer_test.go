@@ -76,4 +76,7 @@ func TestWriter(t *testing.T) {
 	if h2.Get("test") != "value" {
 		t.Error("header not written")
 	}
+
+	t.Log("test Write")
+	bd := []byte{1, 2, 3, 4, 5}
 }
