@@ -83,4 +83,7 @@ func TestWriter(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Unexpected error while writing: %s", err)
 	}
+	if n != len(bd) {
+		t.Errorf("Unexpected number of bytes written: %s", err)
+	}
 }
