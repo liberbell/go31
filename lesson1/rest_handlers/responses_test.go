@@ -46,4 +46,10 @@ func CleanDb(b *testing.B) {
 		Name: "John",
 		Role: "Tester",
 	}
+
+	err := u.Save()
+	if err != nil {
+		b.Fatalf("Error saving a record: %s", err)
+	}
+	b.ResetTimer()
 }
