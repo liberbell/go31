@@ -3,7 +3,6 @@ package handlers
 import (
 	"net/http"
 	"os"
-	"testing"
 
 	"gopkg.in/mgo.v2/bson"
 )
@@ -39,17 +38,20 @@ func (mw *mockWriter) Header() http.Header {
 	return mw.header
 }
 
-func CleanDb(b *testing.B) {
+func prepDb(n int) error {
 	os.Remove(dbPath)
-	u := &User{
-		ID:   bson.NewObjectId(),
-		Name: "John",
-		Role: "Tester",
-	}
+	for i := 0; i < n; i++ {
 
-	err := u.Save()
-	if err != nil {
-		b.Fatalf("Error saving a record: %s", err)
+		u := &User{
+			ID:   bson.NewObjectId(),
+			Name: "John",
+			Role: "Tester",
+		}
+
+		err := u.Save()
+		if err != nil {
+			b.Fatalf("Error saving a record: %s", err)
+		}
+		b.ResetTimer()
 	}
-	b.ResetTimer()
 }
