@@ -2,6 +2,12 @@ package handlers
 
 import "net/http"
 
+type response struct {
+	header http.Header
+	code   int
+	body   []byte
+}
+
 type mockWriter response
 
 func newMockWriter() *mockWriter {
