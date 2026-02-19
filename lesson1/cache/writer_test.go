@@ -87,12 +87,13 @@ func TestWriter(t *testing.T) {
 	if n != len(bd) {
 		t.Errorf("Unexpected number of bytes written. Expected: %d / Actual: %d", len(bd), n)
 	}
-	if &w.response.body == &bd {
+	if &mw.body == &bd {
 		t.Error("Body assigned, not copied")
 	}
-	if !reflect.DeepEqual(w.response.body, bd) {
+	if !reflect.DeepEqual(mw.body, bd) {
 		t.Error("Body not copied")
-		t.Error(w.response.body)
+		t.Error(mw.body)
 		t.Error(bd)
 	}
+
 }
