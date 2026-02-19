@@ -3,6 +3,8 @@ package handlers
 import (
 	"net/http"
 	"os"
+	"os/user"
+	"strconv"
 
 	"gopkg.in/mgo.v2/bson"
 )
@@ -42,15 +44,15 @@ func prepDb(n int) error {
 	os.Remove(dbPath)
 	for i := 0; i < n; i++ {
 
-		u := &User{
+		u := &user.User{
 			ID:   bson.NewObjectId(),
-			Name: "John",
+			Name: "John_" + strconv.Itoa(i),
 			Role: "Tester",
 		}
 
 		err := u.Save()
 		if err != nil {
-			b.Fatalf("Error saving a record: %s", err)
+			return err
 		}
 		b.ResetTimer()
 	}
