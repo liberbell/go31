@@ -1,9 +1,9 @@
 package handlers
 
 import (
+	"Lesson1/user"
 	"net/http"
 	"os"
-	"os/user"
 	"strconv"
 
 	"gopkg.in/mgo.v2/bson"
@@ -54,6 +54,6 @@ func prepDb(n int) error {
 		if err != nil {
 			return err
 		}
-		b.ResetTimer()
+		return nil
 	}
 }
