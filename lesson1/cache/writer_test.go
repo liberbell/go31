@@ -91,7 +91,7 @@ func TestWriter(t *testing.T) {
 		t.Error("Body assigned, not copied")
 	}
 	if !reflect.DeepEqual(mw.body, bd) {
-		t.Error("Body not copied")
+		t.Error("Body not passed through")
 		t.Error(mw.body)
 		t.Error(bd)
 	}
