@@ -3,6 +3,7 @@ package cache
 import (
 	"net/http"
 	"net/url"
+	"reflect"
 	"testing"
 )
 
@@ -88,5 +89,10 @@ func TestWriter(t *testing.T) {
 	}
 	if &w.response.body == &bd {
 		t.Error("Body assigned, not copied")
+	}
+	if !reflect.DeepEqual(w.response.body, bd) {
+		t.Error("Body not copied")
+		t.Error(w.response.body)
+		t.Error(bd)
 	}
 }
