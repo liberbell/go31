@@ -1,6 +1,12 @@
 package handlers
 
-import "net/http"
+import (
+	"net/http"
+	"os"
+	"testing"
+
+	"gopkg.in/mgo.v2/bson"
+)
 
 type response struct {
 	header http.Header
@@ -31,4 +37,13 @@ func (mw *mockWriter) WriteHeader(code int) {
 
 func (mw *mockWriter) Header() http.Header {
 	return mw.header
+}
+
+func CleanDb(b *testing.B) {
+	os.Remove(dbPath)
+	u := &User{
+		ID:   bson.NewObjectId(),
+		Name: "John",
+		Role: "Tester",
+	}
 }
