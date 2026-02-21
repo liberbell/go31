@@ -70,6 +70,8 @@ func prepDb(n int) error {
 }
 
 func makeRequest() (*http.Request, error) {
-	res := "/test/url?with=params"
-	u, err := url.Parse(res)
+	u, err := url.Parse("/users")
+	if err != nil {
+		return nil, err
+	}
 }
