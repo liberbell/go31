@@ -15,6 +15,10 @@ type response struct {
 	body   []byte
 }
 
+const (
+	dbPath = "users.db"
+)
+
 type mockWriter response
 
 func newMockWriter() *mockWriter {
@@ -54,6 +58,6 @@ func prepDb(n int) error {
 		if err != nil {
 			return err
 		}
-		return nil
 	}
+	return nil
 }
