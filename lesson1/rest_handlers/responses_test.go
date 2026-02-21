@@ -83,4 +83,9 @@ func makeRequest() (*http.Request, error) {
 
 func getAll(b *testing.B, r *http.Request) {
 	prepDb(100)
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		mw := newMockWriter()
+	}
 }
