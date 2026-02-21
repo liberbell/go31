@@ -3,6 +3,7 @@ package handlers
 import (
 	"Lesson1/user"
 	"net/http"
+	"net/url"
 	"os"
 	"strconv"
 	"testing"
@@ -47,6 +48,7 @@ func (mw *mockWriter) Header() http.Header {
 
 func TestMain(m *testing.M) {
 	m.Run()
+	os.Remove(dbPath)
 }
 
 func prepDb(n int) error {
@@ -65,4 +67,9 @@ func prepDb(n int) error {
 		}
 	}
 	return nil
+}
+
+func makeRequest() (*http.Request, error) {
+	res := "/test/url?with=params"
+	u, err := url.Parse(res)
 }
