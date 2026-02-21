@@ -97,4 +97,14 @@ func BenchmarkGetAllNonCached(b *testing.B) {
 	if err != nil {
 		b.Fatal(err)
 	}
+	r.Header.Add("Cache-Control", "no-cache")
+	getAll(b, r)
+}
+
+func BenchmarkGetAllCached(b *testing.B) {
+	r, err := makeRequest()
+	if err != nil {
+		b.Fatal(err)
+	}
+	getAll(b, r)
 }
