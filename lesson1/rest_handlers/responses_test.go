@@ -80,3 +80,7 @@ func makeRequest() (*http.Request, error) {
 		Method: http.MethodGet,
 	}, nil
 }
+
+func getAll(b *testing.B, r *http.Request) {
+	prepDb(100)
+}
