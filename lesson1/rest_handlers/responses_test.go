@@ -91,3 +91,10 @@ func getAll(b *testing.B, r *http.Request) {
 		UsersRouter(mw, r)
 	}
 }
+
+func BenchmarkGetAllNonCached(b *testing.B) {
+	r, err := makeRequest()
+	if err != nil {
+		b.Fatal(err)
+	}
+}
