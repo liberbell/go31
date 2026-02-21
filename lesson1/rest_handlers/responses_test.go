@@ -74,4 +74,9 @@ func makeRequest() (*http.Request, error) {
 	if err != nil {
 		return nil, err
 	}
+	return &http.Request{
+		URL:    u,
+		Header: http.Header{},
+		Method: http.MethodGet,
+	}, nil
 }
