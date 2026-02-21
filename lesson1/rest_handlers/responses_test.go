@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"testing"
 
 	"gopkg.in/mgo.v2/bson"
 )
@@ -42,6 +43,10 @@ func (mw *mockWriter) WriteHeader(code int) {
 
 func (mw *mockWriter) Header() http.Header {
 	return mw.header
+}
+
+func TestMain(m *testing.M) {
+	m.Run()
 }
 
 func prepDb(n int) error {
