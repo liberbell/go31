@@ -87,5 +87,7 @@ func getAll(b *testing.B, r *http.Request) {
 	for i := 0; i < b.N; i++ {
 		b.StopTimer()
 		mw := newMockWriter()
+		b.StartTimer()
+		UsersRouter(mw, r)
 	}
 }
