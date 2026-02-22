@@ -23,6 +23,9 @@ func main() {
 	uid := u.Group("/id")
 	uid.OPTIONS("", usersOptions)
 	uid.HEAD("", usersGetOne)
-	uid.GET("", usersGetAll)
+	uid.GET("", usersGetOne)
+	uid.PUT("", usersPutOne)
+	uid.PATCH("", usersPatchOne)
+
 	e.Start(":12345")
 }
