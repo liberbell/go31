@@ -21,5 +21,8 @@ func main() {
 	u.POST("", usersPostOne)
 
 	uid := u.Group("/id")
+	uid.OPTIONS("", usersOptions)
+	uid.HEAD("", usersGetOne)
+	uid.GET("", usersGetAll)
 	e.Start(":12345")
 }
