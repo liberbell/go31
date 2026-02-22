@@ -7,6 +7,7 @@ import (
 )
 
 func usersOptions(c echo.Context) error {
+	c.Response().Header().Set("Allow")
 	c.NoContent(http.StatusOK)
 }
 
