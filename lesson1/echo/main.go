@@ -17,6 +17,9 @@ func main() {
 	u := e.Group("/users")
 	u.OPTIONS("", usersOptions)
 	u.HEAD("", usersGetAll)
+	u.GET("", usersGetAll)
+	u.POST("", usersPostOne)
 
+	uid := u.Group("/id")
 	e.Start(":12345")
 }
