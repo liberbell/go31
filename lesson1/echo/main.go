@@ -2,12 +2,13 @@ package main
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/labstack/echo"
 )
 
 func usersOptions(c echo.Context) error {
-	c.Response().Header().Set("Allow")
+	c.Response().Header().Set("Allow", strings.Join(methods, ","))
 	c.NoContent(http.StatusOK)
 }
 
