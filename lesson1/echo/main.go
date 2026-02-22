@@ -6,6 +6,10 @@ import (
 	"github.com/labstack/echo"
 )
 
+func usersOptions(c echo.Context) error {
+	c.NoContent(http.StatusOK)
+}
+
 func root(c echo.Context) error {
 	return c.String(http.StatusOK, "Running API v1")
 }
