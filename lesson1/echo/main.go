@@ -14,6 +14,9 @@ func main() {
 	e := echo.New()
 
 	e.GET("/", root)
+	u := e.Group("/users")
+	u.OPTIONS("", usersOptions)
+	u.HEAD("", usersGetAll)
 
 	e.Start(":12345")
 }
