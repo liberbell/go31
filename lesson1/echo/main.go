@@ -26,6 +26,7 @@ func main() {
 	uid.GET("", usersGetOne)
 	uid.PUT("", usersPutOne)
 	uid.PATCH("", usersPatchOne)
+	uid.DELETE("", usersDeleteOne)
 
 	e.Start(":12345")
 }
