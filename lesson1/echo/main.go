@@ -16,17 +16,17 @@ type jsonResponse map[string]interface{}
 func usersOptions(c echo.Context) error {
 	methods := []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}
 	c.Response().Header().Set("Allow", strings.Join(methods, ","))
-	c.NoContent(http.StatusOK)
+	return c.NoContent(http.StatusOK)
 }
 
 func userOptions(c echo.Context) error {
 	methods := []string{http.MethodGet, http.MethodPost, http.MethodPatch, http.MethodDelete, http.MethodHead, http.MethodOptions}
 	c.Response().Header().Set("Allow", strings.Join(methods, ","))
-	c.NoContent(http.StatusOK)
+	return c.NoContent(http.StatusOK)
 }
 
 func usersGetAll(c echo.Context) error {
-	if cache.Serve(w, r) {
+	if cache.Serve(c.Response(), c.Request()) {
 		return
 	}
 
