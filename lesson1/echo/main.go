@@ -60,7 +60,7 @@ func usersPostOne(c echo.Context) error {
 	}
 	cache.Drop("/users")
 	w.Header().Set("Location", "/users/"+u.ID.Hex())
-	w.WriteHeader(http.StatusCreated)
+	return c.NoContent(http.StatusCreated)
 }
 
 func usersGetOne(c echo.Context) error {
