@@ -77,9 +77,8 @@ func usersGetOne(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 		return
 	}
-	if r.Method == http.MethodHead {
-		postBodyResponse(w, http.StatusOK, jsonResponse{})
-		return
+	if c.Request().Method == http.MethodHead {
+		return c.NoContent(http.StatusOK)
 	}
 	cw := cache.NewWriter(w, r)
 	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
