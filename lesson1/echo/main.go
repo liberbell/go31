@@ -39,8 +39,8 @@ func usersGetAll(c echo.Context) error {
 	if c.Request().Method == http.MethodHead {
 		return c.NoContent(http.StatusOK)
 	}
-	cw := cache.NewWriter(w, r)
-	postBodyResponse(cw, http.StatusOK, jsonResponse{"users": users})
+	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
+	return c.JSON(http.StatusOK, jsonResponse{"users": users})
 }
 
 func usersPostOne(c echo.Context) error {
@@ -82,7 +82,7 @@ func usersGetOne(c echo.Context) error {
 	if c.Request().Method == http.MethodHead {
 		return c.NoContent(http.StatusOK)
 	}
-	cw := cache.NewWriter(w, r)
+	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
 	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
 }
 
