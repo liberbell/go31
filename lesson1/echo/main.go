@@ -45,10 +45,10 @@ func usersGetAll(c echo.Context) error {
 
 func usersPostOne(c echo.Context) error {
 	u := new(user.User)
-	err := bodyToUser(r, u)
+	err := c.Bind(u)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
-		return
+		return nil
 	}
 	u.ID = bson.NewObjectId()
 	err = u.Save()
@@ -58,7 +58,7 @@ func usersPostOne(c echo.Context) error {
 		} else {
 			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
-		return
+		return nil
 	}
 	cache.Drop("/users")
 	w.Header().Set("Location", "/users/"+u.ID.Hex())
@@ -88,7 +88,7 @@ func usersGetOne(c echo.Context) error {
 
 func usersPutOne(c echo.Context) error {
 	u := new(user.User)
-	err := bodyToUser(r, u)
+	err := c.Bind(u)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
 		return nil
