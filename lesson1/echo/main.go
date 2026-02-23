@@ -17,7 +17,7 @@ func usersOptions(c echo.Context) error {
 	c.NoContent(http.StatusOK)
 }
 
-func usersOptions(c echo.Context) error {
+func userOptions(c echo.Context) error {
 	methods := []string{http.MethodGet, http.MethodPost, http.MethodPatch, http.MethodDelete, http.MethodHead, http.MethodOptions}
 	c.Response().Header().Set("Allow", strings.Join(methods, ","))
 	c.NoContent(http.StatusOK)
@@ -54,7 +54,7 @@ func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
 }
 
-func usersDeleteOne(c echo.Context, id bson.ObjectId) {
+func usersDeleteOne(c echo.Context) error {
 	err := user.Delete(id)
 	if err != nil {
 		if err == storm.ErrNotFound {
