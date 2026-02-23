@@ -63,6 +63,28 @@ func usersPostOne(c echo.Context) error {
 	w.WriteHeader(http.StatusCreated)
 }
 
+func usersGetOne(c echo.Context) error {
+	if cache.Serve(w, r) {
+		return
+	}
+
+	u, err := user.One(id)
+	if err != nil {
+		if err == storm.ErrNotFound {
+			return echo.NewHTTPError(http.StatusNotFound)
+			return
+		}
+		return echo.NewHTTPError(http.StatusInternalServerError)
+		return
+	}
+	if r.Method == http.MethodHead {
+		postBodyResponse(w, http.StatusOK, jsonResponse{})
+		return
+	}
+	cw := cache.NewWriter(w, r)
+	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
+}
+
 func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	u, err := user.One(id)
 	if err != nil {
