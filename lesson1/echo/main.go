@@ -135,8 +135,8 @@ func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 		return
 	}
 	cache.Drop("/users")
-	cw := cache.NewWriter(w, r)
-	return c.JSON(cw, http.StatusOK, jsonResponse{"user": u})
+	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
+	return c.JSON(http.StatusOK, jsonResponse{"user": u})
 }
 
 func usersDeleteOne(c echo.Context) error {
@@ -144,13 +144,13 @@ func usersDeleteOne(c echo.Context) error {
 	if err != nil {
 		if err == storm.ErrNotFound {
 			return echo.NewHTTPError(http.StatusNotFound)
-			return
+			return nil
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
-		return
+		return nil
 	}
 	cache.Drop("/users")
-	cache.Drop(cache.MakeResource(r))
+	cache.Drop(cache.MakeResource(c.Request()))
 	return c.NoContent(http.StatusOK)
 }
 
