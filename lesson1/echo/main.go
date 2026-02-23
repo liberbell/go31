@@ -23,14 +23,14 @@ func userOptions(c echo.Context) error {
 	c.NoContent(http.StatusOK)
 }
 
-func usersGetAll(w http.ResponseWriter, r *http.Request) {
+func usersGetAll(c echo.Context) error {
 	if cache.Serve(w, r) {
 		return
 	}
 
 	users, err := user.All()
 	if err != nil {
-		postError(w, http.StatusInternalServerError)
+		return echo.NewHTTPError(http.StatusInternalServerError)
 		return
 	}
 
