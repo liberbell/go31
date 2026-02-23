@@ -27,13 +27,13 @@ func userOptions(c echo.Context) error {
 
 func usersGetAll(c echo.Context) error {
 	if cache.Serve(c.Response(), c.Request()) {
-		return
+		return nil
 	}
 
 	users, err := user.All()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError)
-		return
+		return nil
 	}
 
 	if c.Request().Method == http.MethodHead {
@@ -66,8 +66,8 @@ func usersPostOne(c echo.Context) error {
 }
 
 func usersGetOne(c echo.Context) error {
-	if cache.Serve(w, r) {
-		return
+	if cache.Serve(c.Response(), c.Request()) {
+		return nil
 	}
 
 	u, err := user.One(id)
