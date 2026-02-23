@@ -8,13 +8,13 @@ import (
 )
 
 func usersOptions(c echo.Context) error {
-	methods := []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}, nil)
+	methods := []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}
 	c.Response().Header().Set("Allow", strings.Join(methods, ","))
 	c.NoContent(http.StatusOK)
 }
 
 func usersOptions(c echo.Context) error {
-	methods := []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}, nil)
+	methods := []string{http.MethodGet, http.MethodPost, http.MethodPatch, http.MethodDelete, http.MethodHead, http.MethodOptions}
 	c.Response().Header().Set("Allow", strings.Join(methods, ","))
 	c.NoContent(http.StatusOK)
 }
