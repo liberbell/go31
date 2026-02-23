@@ -8,7 +8,13 @@ import (
 )
 
 func usersOptions(c echo.Context) error {
-	methods := []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}
+	methods := []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}, nil)
+	c.Response().Header().Set("Allow", strings.Join(methods, ","))
+	c.NoContent(http.StatusOK)
+}
+
+func usersOptions(c echo.Context) error {
+	methods := []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}, nil)
 	c.Response().Header().Set("Allow", strings.Join(methods, ","))
 	c.NoContent(http.StatusOK)
 }
