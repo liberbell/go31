@@ -99,6 +99,12 @@ func usersPutOne(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusBadRequest)
 		return nil
 	}
+	if !bson.IsObjectIdHex(c.Param("id")) {
+		return echo.NewHTTPError(http.StatusNotFound)
+	}
+
+	id := bson.IsObjectIdHex(c.Param("id"))
+
 	u.ID = id
 	err = u.Save()
 	if err != nil {
@@ -115,6 +121,12 @@ func usersPutOne(c echo.Context) error {
 }
 
 func usersPatchOne(c echo.Context) error {
+	if !bson.IsObjectIdHex(c.Param("id")) {
+		return echo.NewHTTPError(http.StatusNotFound)
+	}
+
+	id := bson.IsObjectIdHex(c.Param("id"))
+
 	u, err := user.One(id)
 	if err != nil {
 		if err == storm.ErrNotFound {
