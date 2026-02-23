@@ -34,13 +34,33 @@ func usersGetAll(c echo.Context) error {
 		return
 	}
 
-	if r.Method == http.MethodHead {
+	if c.Request().Method == http.MethodHead {
 		return c.NoContent(http.StatusOK)
-		postBodyResponse(w, http.StatusOK, jsonResponse{})
-		return
 	}
 	cw := cache.NewWriter(w, r)
 	postBodyResponse(cw, http.StatusOK, jsonResponse{"users": users})
+}
+
+func usersPostOne(c echo.Context) error {
+	u := new(user.User)
+	err := bodyToUser(r, u)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusBadRequest)
+		return
+	}
+	u.ID = bson.NewObjectId()
+	err = u.Save()
+	if err != nil {
+		if err == user.ErrRecordInvalid {
+			postError(w, http.StatusBadRequest)
+		} else {
+			postError(w, http.StatusInternalServerError)
+		}
+		return
+	}
+	cache.Drop("/users")
+	w.Header().Set("Location", "/users/"+u.ID.Hex())
+	w.WriteHeader(http.StatusCreated)
 }
 
 func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
