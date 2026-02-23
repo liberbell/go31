@@ -11,6 +11,8 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+type jsonResponse map[string]interface{}
+
 func usersOptions(c echo.Context) error {
 	methods := []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}
 	c.Response().Header().Set("Allow", strings.Join(methods, ","))
@@ -134,7 +136,7 @@ func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	}
 	cache.Drop("/users")
 	cw := cache.NewWriter(w, r)
-	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
+	return c.JSON(cw, http.StatusOK, jsonResponse{"user": u})
 }
 
 func usersDeleteOne(c echo.Context) error {
@@ -149,7 +151,7 @@ func usersDeleteOne(c echo.Context) error {
 	}
 	cache.Drop("/users")
 	cache.Drop(cache.MakeResource(r))
-	w.WriteHeader(http.StatusOK)
+	return c.NoContent(http.StatusOK)
 }
 
 func root(c echo.Context) error {
