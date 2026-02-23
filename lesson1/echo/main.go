@@ -23,6 +23,25 @@ func userOptions(c echo.Context) error {
 	c.NoContent(http.StatusOK)
 }
 
+func usersGetAll(w http.ResponseWriter, r *http.Request) {
+	if cache.Serve(w, r) {
+		return
+	}
+
+	users, err := user.All()
+	if err != nil {
+		postError(w, http.StatusInternalServerError)
+		return
+	}
+
+	if r.Method == http.MethodHead {
+		postBodyResponse(w, http.StatusOK, jsonResponse{})
+		return
+	}
+	cw := cache.NewWriter(w, r)
+	postBodyResponse(cw, http.StatusOK, jsonResponse{"users": users})
+}
+
 func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	u, err := user.One(id)
 	if err != nil {
