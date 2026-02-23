@@ -52,9 +52,9 @@ func usersPostOne(c echo.Context) error {
 	err = u.Save()
 	if err != nil {
 		if err == user.ErrRecordInvalid {
-			postError(w, http.StatusBadRequest)
+			return echo.NewHTTPError(http.StatusBadRequest)
 		} else {
-			postError(w, http.StatusInternalServerError)
+			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
 		return
 	}
