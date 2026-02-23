@@ -35,6 +35,7 @@ func usersGetAll(c echo.Context) error {
 	}
 
 	if r.Method == http.MethodHead {
+		return c.NoContent(http.StatusOK)
 		postBodyResponse(w, http.StatusOK, jsonResponse{})
 		return
 	}
