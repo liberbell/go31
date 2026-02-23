@@ -74,10 +74,10 @@ func usersGetOne(c echo.Context) error {
 	if err != nil {
 		if err == storm.ErrNotFound {
 			return echo.NewHTTPError(http.StatusNotFound)
-			return
+			return nil
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
-		return
+		return nil
 	}
 	if c.Request().Method == http.MethodHead {
 		return c.NoContent(http.StatusOK)
@@ -90,18 +90,18 @@ func usersPutOne(c echo.Context) error {
 	u := new(user.User)
 	err := bodyToUser(r, u)
 	if err != nil {
-		postError(w, http.StatusBadRequest)
-		return
+		return echo.NewHTTPError(http.StatusBadRequest)
+		return nil
 	}
 	u.ID = id
 	err = u.Save()
 	if err != nil {
 		if err == user.ErrRecordInvalid {
-			postError(w, http.StatusBadRequest)
+			return echo.NewHTTPError(http.StatusBadRequest)
 		} else {
-			postError(w, http.StatusInternalServerError)
+			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
-		return
+		return nil
 	}
 	cache.Drop("/users")
 	cw := cache.NewWriter(w, r)
@@ -112,15 +112,15 @@ func usersPatchOne(c echo.Context) error {
 	u, err := user.One(id)
 	if err != nil {
 		if err == storm.ErrNotFound {
-			postError(w, http.StatusNotFound)
+			return echo.NewHTTPError(http.StatusNotFound)
 			return nil
 		}
-		postError(w, http.StatusInternalServerError)
+		return echo.NewHTTPError(http.StatusInternalServerError)
 		return nil
 	}
 	err = bodyToUser(r, u)
 	if err != nil {
-		postError(w, http.StatusBadRequest)
+		return echo.NewHTTPError(http.StatusBadRequest)
 		return nil
 	}
 
