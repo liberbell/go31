@@ -84,6 +84,28 @@ func usersGetOne(c echo.Context) error {
 	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
 }
 
+func usersPutOne(c echo.Context) error {
+	u := new(user.User)
+	err := bodyToUser(r, u)
+	if err != nil {
+		postError(w, http.StatusBadRequest)
+		return
+	}
+	u.ID = id
+	err = u.Save()
+	if err != nil {
+		if err == user.ErrRecordInvalid {
+			postError(w, http.StatusBadRequest)
+		} else {
+			postError(w, http.StatusInternalServerError)
+		}
+		return
+	}
+	cache.Drop("/users")
+	cw := cache.NewWriter(w, r)
+	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
+}
+
 func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
 	u, err := user.One(id)
 	if err != nil {
