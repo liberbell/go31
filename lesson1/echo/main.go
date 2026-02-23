@@ -70,6 +70,12 @@ func usersGetOne(c echo.Context) error {
 		return nil
 	}
 
+	if !bson.IsObjectIdHex(c.Param("id")) {
+		return echo.NewHTTPError(http.StatusNotFound)
+	}
+
+	id := bson.IsObjectIdHex(c.Param("id"))
+
 	u, err := user.One(id)
 	if err != nil {
 		if err == storm.ErrNotFound {
