@@ -108,31 +108,31 @@ func usersPutOne(c echo.Context) error {
 	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
 }
 
-func usersPatchOne(w http.ResponseWriter, r *http.Request, id bson.ObjectId) {
+func usersPatchOne(c echo.Context) error {
 	u, err := user.One(id)
 	if err != nil {
 		if err == storm.ErrNotFound {
 			postError(w, http.StatusNotFound)
-			return
+			return nil
 		}
 		postError(w, http.StatusInternalServerError)
-		return
+		return nil
 	}
 	err = bodyToUser(r, u)
 	if err != nil {
 		postError(w, http.StatusBadRequest)
-		return
+		return nil
 	}
 
 	u.ID = id
 	err = u.Save()
 	if err != nil {
 		if err == user.ErrRecordInvalid {
-			postError(w, http.StatusBadRequest)
+			return echo.NewHTTPError(http.StatusBadRequest)
 		} else {
-			postError(w, http.StatusInternalServerError)
+			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
-		return
+		return nil
 	}
 	cache.Drop("/users")
 	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
