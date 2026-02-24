@@ -126,7 +126,6 @@ func usersPatchOne(c echo.Context) error {
 	}
 
 	id := bson.IsObjectIdHex(c.Param("id"))
-
 	u, err := user.One(id)
 	if err != nil {
 		if err == storm.ErrNotFound {
@@ -134,10 +133,9 @@ func usersPatchOne(c echo.Context) error {
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
-	err = bodyToUser(r, u)
+	err = c.Bind(u)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
-
 	}
 
 	u.ID = id
@@ -146,8 +144,7 @@ func usersPatchOne(c echo.Context) error {
 		if err == user.ErrRecordInvalid {
 			return echo.NewHTTPError(http.StatusBadRequest)
 		}
-			return echo.NewHTTPError(http.StatusInternalServerError)
-		}
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	cache.Drop("/users")
 	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
