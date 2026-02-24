@@ -167,10 +167,8 @@ func usersDeleteOne(c echo.Context) error {
 	if err != nil {
 		if err == storm.ErrNotFound {
 			return echo.NewHTTPError(http.StatusNotFound)
-			return nil
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
-		return nil
 	}
 	cache.Drop("/users")
 	cache.Drop(cache.MakeResource(c.Request()))
