@@ -33,7 +33,6 @@ func usersGetAll(c echo.Context) error {
 	users, err := user.All()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError)
-		return nil
 	}
 
 	if c.Request().Method == http.MethodHead {
@@ -58,7 +57,7 @@ func usersPostOne(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	cache.Drop("/users")
-	w.Header().Set("Location", "/users/"+u.ID.Hex())
+	c.Response().Header().Set("Location", "/users/"+u.ID.Hex())
 	return c.NoContent(http.StatusCreated)
 }
 
