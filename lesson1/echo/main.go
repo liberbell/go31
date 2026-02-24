@@ -48,17 +48,14 @@ func usersPostOne(c echo.Context) error {
 	err := c.Bind(u)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
-		return nil
 	}
 	u.ID = bson.NewObjectId()
 	err = u.Save()
 	if err != nil {
 		if err == user.ErrRecordInvalid {
 			return echo.NewHTTPError(http.StatusBadRequest)
-		} else {
-			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
-		return nil
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	cache.Drop("/users")
 	w.Header().Set("Location", "/users/"+u.ID.Hex())
@@ -80,16 +77,14 @@ func usersGetOne(c echo.Context) error {
 	if err != nil {
 		if err == storm.ErrNotFound {
 			return echo.NewHTTPError(http.StatusNotFound)
-			return nil
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
-		return nil
 	}
 	if c.Request().Method == http.MethodHead {
 		return c.NoContent(http.StatusOK)
 	}
 	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
-	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
+	return c.JSON(http.StatusOK, jsonResponse{"user": u})
 }
 
 func usersPutOne(c echo.Context) error {
@@ -97,7 +92,6 @@ func usersPutOne(c echo.Context) error {
 	err := c.Bind(u)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
-		return nil
 	}
 	if !bson.IsObjectIdHex(c.Param("id")) {
 		return echo.NewHTTPError(http.StatusNotFound)
