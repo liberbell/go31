@@ -7,7 +7,9 @@ import (
 	"strings"
 
 	"github.com/asdine/storm"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -166,6 +168,7 @@ func root(c echo.Context) error {
 
 func main() {
 	e := echo.New()
+	e.Pre(middleware.RemoveTrailingSlash())
 
 	e.GET("/", root)
 	u := e.Group("/users")
