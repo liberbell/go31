@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/asdine/storm"
-	"github.com/go-chi/chi/v5/middleware"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"gopkg.in/mgo.v2/bson"
