@@ -168,6 +168,8 @@ func root(c echo.Context) error {
 func main() {
 	e := echo.New()
 	e.Pre(middleware.RemoveTrailingSlash())
+	e.Use(middleware.Recover())
+	e.Use(middleware.Secure())
 
 	e.GET("/", root)
 	u := e.Group("/users")
