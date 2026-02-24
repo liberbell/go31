@@ -158,6 +158,11 @@ func usersPatchOne(c echo.Context) error {
 }
 
 func usersDeleteOne(c echo.Context) error {
+	if !bson.IsObjectIdHex(c.Param("id")) {
+		return echo.NewHTTPError(http.StatusNotFound)
+	}
+
+	id := bson.IsObjectIdHex(c.Param("id"))
 	err := user.Delete(id)
 	if err != nil {
 		if err == storm.ErrNotFound {
