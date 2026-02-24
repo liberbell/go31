@@ -110,14 +110,12 @@ func usersPutOne(c echo.Context) error {
 	if err != nil {
 		if err == user.ErrRecordInvalid {
 			return echo.NewHTTPError(http.StatusBadRequest)
-		} else {
-			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
-		return nil
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	cache.Drop("/users")
-	cw := cache.NewWriter(w, r)
-	postBodyResponse(cw, http.StatusOK, jsonResponse{"user": u})
+	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
+	return c.JSON(http.StatusOK, jsonResponse{"user": u})
 }
 
 func usersPatchOne(c echo.Context) error {
