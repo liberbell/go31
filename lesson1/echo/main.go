@@ -131,15 +131,13 @@ func usersPatchOne(c echo.Context) error {
 	if err != nil {
 		if err == storm.ErrNotFound {
 			return echo.NewHTTPError(http.StatusNotFound)
-			return nil
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError)
-		return nil
 	}
 	err = bodyToUser(r, u)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusBadRequest)
-		return nil
+
 	}
 
 	u.ID = id
@@ -147,10 +145,9 @@ func usersPatchOne(c echo.Context) error {
 	if err != nil {
 		if err == user.ErrRecordInvalid {
 			return echo.NewHTTPError(http.StatusBadRequest)
-		} else {
+		}
 			return echo.NewHTTPError(http.StatusInternalServerError)
 		}
-		return nil
 	}
 	cache.Drop("/users")
 	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
