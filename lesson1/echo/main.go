@@ -174,7 +174,7 @@ func main() {
 	u.GET("", usersGetAll)
 	u.POST("", usersPostOne)
 
-	uid := u.Group("/id")
+	uid := u.Group("/:id")
 	uid.OPTIONS("", usersOptions)
 	uid.HEAD("", usersGetOne)
 	uid.GET("", usersGetOne)
