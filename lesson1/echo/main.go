@@ -15,7 +15,10 @@ import (
 type jsonResponse map[string]interface{}
 
 func serverCache(next echo.HandlerFunc) echo.HandlerFunc {
-	return func(c echo.Context) error {}
+	return func(c echo.Context) error {
+		c.Response().Header().Set(echo.HeaderServer, "Echo/3.0")
+		return next(c)
+	}
 }
 
 func usersOptions(c echo.Context) error {
