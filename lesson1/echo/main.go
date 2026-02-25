@@ -34,9 +34,6 @@ func userOptions(c echo.Context) error {
 }
 
 func usersGetAll(c echo.Context) error {
-	if cache.Serve(c.Response(), c.Request()) {
-		return nil
-	}
 
 	users, err := user.All()
 	if err != nil {
