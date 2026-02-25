@@ -175,6 +175,7 @@ func auth(username, password string, c echo.Context) (bool, error) {
 	if username == "joe" && password == "secret" {
 		return true, nil
 	}
+	return false, nil
 }
 
 func main() {
@@ -192,7 +193,7 @@ func main() {
 	u.OPTIONS("", usersOptions)
 	u.HEAD("", usersGetAll, serverCache)
 	u.GET("", usersGetAll, serverCache, cacheResponse)
-	u.POST("", usersPostOne)
+	u.POST("", usersPostOne, middleware.BasicAuth(auth))
 
 	uid := u.Group("/:id")
 	uid.OPTIONS("", usersOptions)
