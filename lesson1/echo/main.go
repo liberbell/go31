@@ -16,7 +16,9 @@ type jsonResponse map[string]interface{}
 
 func serverCache(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		c.Response().Header().Set(echo.HeaderServer, "Echo/3.0")
+		if cache.Serve(c.Response(), c.Request()) {
+			return nil
+		}
 		return next(c)
 	}
 }
