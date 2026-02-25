@@ -190,5 +190,5 @@ func main() {
 	uid.PATCH("", usersPatchOne)
 	uid.DELETE("", usersDeleteOne)
 
-	e.Start(":12345")
+	e.Logger.Fatal(e.Start(":12345"))
 }
