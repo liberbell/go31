@@ -171,6 +171,12 @@ func root(c echo.Context) error {
 	return c.String(http.StatusOK, "Running API v1")
 }
 
+func auth(username, password string, c echo.Context) (bool, error) {
+	if username == "joe" && password == "secret" {
+		return true, nil
+	}
+}
+
 func main() {
 	e := echo.New()
 	e.Pre(middleware.RemoveTrailingSlash())
