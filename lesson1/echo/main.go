@@ -14,6 +14,10 @@ import (
 
 type jsonResponse map[string]interface{}
 
+func serverCache(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {}
+}
+
 func usersOptions(c echo.Context) error {
 	methods := []string{http.MethodGet, http.MethodPost, http.MethodHead, http.MethodOptions}
 	c.Response().Header().Set("Allow", strings.Join(methods, ","))
