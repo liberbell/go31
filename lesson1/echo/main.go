@@ -116,7 +116,6 @@ func usersPutOne(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	cache.Drop("/users")
-	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
 	return c.JSON(http.StatusOK, jsonResponse{"user": u})
 }
 
@@ -147,7 +146,6 @@ func usersPatchOne(c echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	cache.Drop("/users")
-	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
 	return c.JSON(http.StatusOK, jsonResponse{"user": u})
 }
 
