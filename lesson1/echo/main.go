@@ -16,9 +16,13 @@ type jsonResponse map[string]interface{}
 
 func serverCache(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		if cache.Serve(c.Response(), c.Request()) {
-			return nil
-		}
+		return next(c)
+	}
+}
+
+func cacheResponse(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
 		return next(c)
 	}
 }
@@ -45,7 +49,6 @@ func usersGetAll(c echo.Context) error {
 	if c.Request().Method == http.MethodHead {
 		return c.NoContent(http.StatusOK)
 	}
-	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
 	return c.JSON(http.StatusOK, jsonResponse{"users": users})
 }
 
@@ -89,7 +92,6 @@ func usersGetOne(c echo.Context) error {
 	if c.Request().Method == http.MethodHead {
 		return c.NoContent(http.StatusOK)
 	}
-	c.Response().Writer = cache.NewWriter(c.Response().Writer, c.Request())
 	return c.JSON(http.StatusOK, jsonResponse{"user": u})
 }
 
