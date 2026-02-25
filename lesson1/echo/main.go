@@ -168,8 +168,12 @@ func root(c echo.Context) error {
 func main() {
 	e := echo.New()
 	e.Pre(middleware.RemoveTrailingSlash())
+
 	e.Use(middleware.Recover())
 	e.Use(middleware.Secure())
+	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+		Format: "${method} ${uri} ${status} ${latency_human}\n",
+	}))
 
 	e.GET("/", root)
 	u := e.Group("/users")
