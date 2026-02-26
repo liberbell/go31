@@ -201,7 +201,7 @@ func main() {
 	uid.GET("", usersGetOne, serverCache, cacheResponse)
 	uid.PUT("", usersPutOne, middleware.BasicAuth(auth), cacheResponse)
 	uid.PATCH("", usersPatchOne, middleware.BasicAuth(auth), cacheResponse)
-	uid.DELETE("", usersDeleteOne)
+	uid.DELETE("", usersDeleteOne, middleware.BasicAuth(auth))
 
 	e.Logger.Fatal(e.Start(":12345"))
 }
