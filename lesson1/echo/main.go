@@ -199,8 +199,8 @@ func main() {
 	uid.OPTIONS("", usersOptions)
 	uid.HEAD("", usersGetOne, serverCache)
 	uid.GET("", usersGetOne, serverCache, cacheResponse)
-	uid.PUT("", usersPutOne, cacheResponse)
-	uid.PATCH("", usersPatchOne, cacheResponse)
+	uid.PUT("", usersPutOne, middleware.BasicAuth(auth), cacheResponse)
+	uid.PATCH("", usersPatchOne, middleware.BasicAuth(auth), cacheResponse)
 	uid.DELETE("", usersDeleteOne)
 
 	e.Logger.Fatal(e.Start(":12345"))
